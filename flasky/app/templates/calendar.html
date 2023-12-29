@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DayGlimpse: Your Daily Organizer{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Your Personal Calendar & Reminder Tool</h1>
+</div>
+
+<div class="col-md-4">
+  <h3>Interactive Calendar:</h3>
+  <p>Select a date to schedule a new reminder.</p>
+  <br> <br>
+  {% if current_user.is_authenticated %}
+    <h4>You currently have {{ current_user.reminder|length }} Reminders:</h4>
+    <ul>
+      {% for rem in current_user.reminder %}
+        <li>{{ rem.note_name }} scheduled for {{ rem.note_set_date }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p><a href="{{ url_for('auth.login') }}">Sign in</a> to view or create your reminders.</p>
+  {% endif %}
+</div>
+
+<div id="calendar-grid" class="col-md-7"></div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='calendar.js') }}"></script>
+  <script>
+    $(function() {
+      var today = "{{ today }}";
+      $.ajax({
+        url: "/calendar-data/" + today,
+        success: function(data) {
+          buildCalendar(data);
+        }
+      });
+    });
+  </script>
+{% endblock %}

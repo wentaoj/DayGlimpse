@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}DayGlimpse: {{user.username}}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <div class="col-md-5">
+    <h1>Hello, {{ current_user.username }}!</h1>
+    <p>Welcome to your DayGlimpse profile!</p>
+    {% if user == current_user %}
+      <h2>Your Account Details:</h2>
+      <ul>
+        <li>User ID: <strong>{{ current_user.uid }}</strong></li>
+        <li>Email: {{ current_user.email }}</li>
+        <li>Username: {{ current_user.username }}</li>
+        <li>Date of Birth: {{ current_user.dob }}</li>
+      </ul>
+      <p>Remember, only you can set up or modify reminders with your User ID.</p>
+    {% else %}
+      <h2>{{ user.username }}'s Profile</h2>
+      <p>Email Address: {{ user.email }}</p>
+      <a class="btn btn-default" href="{{ url_for('main.user', username=current_user.username) }}">Back to Your Profile</a>
+    {% endif %}
+  </div>
+
+  <div class="col-md-7 vertical-spacing">
+    {% if user == current_user %}
+      <h2>Your Latest Reminder:</h2>
+      {% if most_recent_reminder %}
+        <p>You have <strong>{{ len_reminders }}</strong> reminders in total.</p>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div>Reminder: {{ most_recent_reminder.note_name }}</div>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li>Created: {{ most_recent_reminder.create_time }}</li>
+              <li>ID: {{ most_recent_reminder.note_id }}</li>
+              <li>Date: {{ most_recent_reminder.note_set_date }}</li>
+              <li>Start Time: {{ most_recent_reminder.date_start_hour }}</li>
+              <li>End Time: {{ most_recent_reminder.date_end_hour }}</li>
+              <li>Location: {{ most_recent_reminder.note_loc }}</li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn-default" href="{{ url_for('main.calendar') }}">View Calendar</a>
+      {% else %}
+        <p>No reminders set up yet.</p>
+        <a class="btn btn-primary" href="{{ url_for('main.calendar') }}">Create a Reminder</a>
+      {% endif %}
+    {% else %}
+      <h2>{{ user.username }}'s Profile</h2>
+      <p>View your reminders by visiting your profile.</p>
+      <a class="btn btn-default" href="{{ url_for('main.user', username=current_user.username) }}">Back to Your Profile</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}DayGlimpse: Your Daily Organizer{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Welcome to DayGlimpse, 
+    {% if current_user.is_authenticated %} 
+      {{ current_user.username }}
+    {% else %} 
+      Future Organizer!
+    {% endif %}
+  </h1>
+</div>
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Organize Your Day with Ease</h3>
+    </div>
+    <div class="panel-body">
+      <h4>With DayGlimpse:</h4>
+      <ul>
+        <li>Never miss important events</li>
+        <li>Efficiently manage your schedule</li>
+        <li>Stay on top of your tasks</li>
+      </ul>
+      <h4>Our System Helps You:</h4>
+      <ul>
+        <li>Organize your daily activities</li>
+        <li>Balance work and personal tasks</li>
+      </ul>
+      <h4> Getting Started!</h4>
+      <div> 
+        {% if current_user.is_authenticated %}
+          <h5>Welcome, <strong><em>{{ current_user.username }}</em></strong>!</h5>
+          <a href="{{ url_for('main.calendar') }}">Let us Organize Your Day!</a>
+        {% else %}
+          Click 
+          <a href="{{ url_for('auth.login') }}">Login</a> 
+          in the top right corner and 
+          <a href="{{ url_for('auth.register') }}"><em>Sign Up!</em></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-8">
+  <figure>
+    <a href="{{ url_for('main.calendar') }}">
+      <img src="{{ url_for('static', filename='showcase.png') }}" alt="DayGlimpse Calendar" class="img-responsive">
+    </a>
+    <figcaption>Explore DayGlimpse Features!</figcaption>
+  </figure>
+</div>
+{% endblock %}

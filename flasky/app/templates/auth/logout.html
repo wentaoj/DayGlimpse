@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DayGlimpse: Sign Out{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Ready to Sign Out?</h1>
+  <h2>We hope to see you back soon!</h2>
+  <div class="vertical-spacing"></div>
+  <form action="{{ url_for('auth.logout') }}" method="POST">
+    <button type="submit" class="btn btn-primary">Confirm Logout</button>
+  </form>
+</div>
+{% endblock %}

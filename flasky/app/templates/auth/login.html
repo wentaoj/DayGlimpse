@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DayGlimpse: Sign In{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Sign In to DayGlimpse</h1>
+</div>
+<div class="col-md-4">
+  <h3>Access Your Organizer:</h3>
+  {{ wtf.quick_form(form) }}
+  <div class="vertical-spacing"></div>
+  <p>Not a member yet? <a href="{{ url_for('auth.register') }}">Join us now!</a></p>
+</div>
+{% endblock %}

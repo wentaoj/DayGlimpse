@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DayGlimpse: Edit Reminders{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Edit Your Reminders, {{ current_user.username }}</h1>
+</div>
+<div class="col-md-4">
+  <h2>Reminder Date:</h2>
+  <h3> {{ date }} </h3>
+  <a href="{{ url_for('main.process_reminder', date=date) }}" class="btn btn-primary">Create New Reminder</a>
+  <br>
+  <h2>Completed Reminders:</h2>
+  {{ wtf.quick_form(form, action=url_for('main.reminders_on_date', date=date)) }}
+</div>
+<div class="col-md-4">
+  <h3>Reminders for the Day:</h3>
+  {% if reminders %}
+  <ul>
+    {% for reminder in reminders %}
+      <li>
+        <h4>{{ reminder.note_name }}</h4>
+        <ul>
+          <li>Created: {{ reminder.create_time }}</li>
+          <li>ID: {{ reminder.note_id }}</li>
+          <li>Start: {{ reminder.date_start_hour }}</li>
+          <li>End: {{ reminder.date_end_hour }}</li>
+          <li>Location: {{ reminder.note_loc }}</li>
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No reminders set for this date.</p>
+  {% endif %}
+</div>
+<div class="col-md-4"></div>
+{% endblock %}

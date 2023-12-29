@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DayGlimpse: Add Reminder{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Schedule a New Reminder</h1>
+</div>
+<div class="col-md-4">
+  <h3>Create Your Reminder</h3>
+  <p>Fill in the details for your reminder below.</p>
+  <h3> Selected Date: </h3>
+  <h2> {{ request.args.get('date') }} </h2>
+</div>
+<div class="col-md-4">
+  {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

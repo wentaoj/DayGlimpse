@@ -1,0 +1,57 @@
+.navbar {
+    background-color: #0c0d0b;
+}
+
+.navbar-brand {
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: whitesmoke;
+}
+
+#calendar-grid table {
+    width: 100%;
+    background-color: white;
+    opacity: 0.79;
+    margin: 25px;
+    padding: 15px;
+    border: 2px solid lightseagreen;
+    border-collapse: collapse;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+#calendar-grid table th {
+    font-weight: bold;
+    color: white;
+    background-color: seagreen;
+    text-align: center;
+    padding: 10px;
+}
+
+#calendar-grid table td {
+    text-align: center;
+    font-size: medium;
+    padding: 10px;
+}
+
+#calendar-grid table td:hover {
+    background-color: lightseagreen;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.cal-btn {
+    background-color: seagreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.vertical-spacing {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
